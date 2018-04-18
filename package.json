@@ -1,0 +1,18 @@
+{
+  "name": "auth0-simple-spa",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattstewart/auth0-simple-spa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattstewart/auth0-simple-spa/issues"
+  },
+  "homepage": "https://github.com/mattstewart/auth0-simple-spa#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}

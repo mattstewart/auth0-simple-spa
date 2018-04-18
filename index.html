@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth0 - Simple SPA</title>
+</head>
+<body>
+
+    <h1>A very simple single page application</h1>
+
+    <p>Click the button to log in</p>
+
+    <button onclick="signIn()">Login</button>
+
+    <p>Results of Login will be displayed below:</p>
+
+    <br>
+
+    <div id="result"></div>
+
+    <script src="//cdn.auth0.com/js/lock/11.5.2/lock.min.js"></script>
+
+    <script type="text/javascript">
+        var lockOptions = {
+            auth: {
+                responseType: 'token',
+                params: {
+                    scope: 'openid name email'
+                }
+            }
+        };
+
+        //Set up the lock login widget
+        var lock = new Auth0Lock(YOUR_CLIENT_ID, YOUR_TENANT.auth0.com, lockOptions);
+
+        lock.on('authenticated', function(authResult) {
+            lock.getProfile(authResult.accessToken, function(error, profile) {
+                if (error) {
+                    console.error('Cannot get user :(', error);
+                    return;
+                }
+
+                //Display the results of login on the page
+                document.getElementById("result").innerHTML = "Login Succeeded: " + "<br><br>" + "id_token: " + authResult.idToken + "<br><br>" + " user profile: " + profile.name + "<br><br>" + "user id: " + profile.sub + "<br><br>" + "access token: " + authResult.accessToken + "<br>";
+            });
+        });
+
+        var onError = function(err) {
+            console.log('There was an error', err);
+        };
+
+        lock.on('authorization_error', onError);
+        lock.on('unrecoverable_error', onError);
+
+        //When the user presses login button, trigger login widget
+        var signIn = function() {
+            lock.show();
+        };
+    </script>
+</body>
+</html>
