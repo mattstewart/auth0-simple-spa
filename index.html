@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Auth0 - Simple SPA</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
+
 <body>
+    <div class="container">
 
-    <h1>A very simple single page application</h1>
+        <h1>Simple SPA</h1>
 
-    <p>Click the button to log in</p>
+        <div class="mt-4">
+            <p>Click the button to log in</p>
+        </div>
 
-    <button onclick="signIn()">Login</button>
+        <button onclick="signIn()">Login</button>
 
-    <p>Results of Login will be displayed below:</p>
+        <div class="mt-4">
+        <p>Results of Login will be displayed below:</p>
+        </div>
 
-    <br>
+        <br>
 
-    <div id="result"></div>
+        <div id="result"></div>
+    </div>
 
     <script src="//cdn.auth0.com/js/lock/11.5.2/lock.min.js"></script>
 
     <script type="text/javascript">
         var lockOptions = {
             auth: {
-                responseType: 'token',
+                responseType: 'token id_token',
                 params: {
                     scope: 'openid name email'
                 }
@@ -30,7 +39,7 @@
         };
 
         //Set up the lock login widget
-        var lock = new Auth0Lock(YOUR_CLIENT_ID, YOUR_TENANT.auth0.com, lockOptions);
+        var lock = new Auth0Lock("YOUR_CLIENT_ID", "YOUR_TENANT.auth0.com", lockOptions);
 
         lock.on('authenticated', function(authResult) {
             lock.getProfile(authResult.accessToken, function(error, profile) {
@@ -57,4 +66,5 @@
         };
     </script>
 </body>
+
 </html>
